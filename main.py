@@ -1,7 +1,13 @@
-# This is a sample Python script.
+from dotenv import load_dotenv
+from sqlalchemy.dialects.postgresql import psycopg2
+import logging
+import models
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Load Environment Variables
+load_dotenv()
+
+logging.basicConfig(filename='logs/main.log', encoding='utf-8', level=logging.DEBUG)
+logging.getLogger('sqlalchemy.dialects.postgresql').setLevel(logging.DEBUG)
 
 
 def print_hi(name):

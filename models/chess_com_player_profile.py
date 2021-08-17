@@ -19,7 +19,8 @@
 }
 """
 
-from sqlalchemy import Column, String, Integer, Date, DateTime, Boolean, ForeignKey
+from sqlalchemy import Column, String, Integer, Date, DateTime, Boolean, ForeignKey, TIMESTAMP, func
+from chessdotcom import *
 from base import Session, Base, engine
 
 
@@ -42,10 +43,34 @@ class ChessComPlayerProfile(Base):
     is_streamer = Column(Boolean)
     twitch_url = Column(String)
     fide = Column(Integer)
-    pass
+    last_time = Column(TIMESTAMP, server_default=func.now(), onupdate=func.current_timestamp())
+
+    def __init__(self, username):
+        player = get_player_profile(username).json['player']
+        self.id = player['@id']
+        self.url = player['url']
+        self.username = player['username']
+        self.player_id = player['player_id']
+        self.title = player.get('title', None)
+        self.status = player['status']
+        self.name = player.get('name')
+        self.avatar = player.get('avatar')
+        self.location = player.get('location', None)
+        self.country = player['country']
+        self.joined = datetime.fromtimestamp(player['joined'])
+        self.last_online = datetime.fromtimestamp(player['last_online'])
+        self.followers = player['followers']
+        self.is_streamer = player['is_streamer']
+        self.twitch_url = player.get('twitch_url', None)
+        self.fide = player.get('fide', None)
+
+
 
 
 def main():
+    player_profile = get_player_profile('gothamchess')
+    player_profile2 = get_player_profile('danlsn')
+    gothamchess = ChessComPlayerProfile('gothamchess')
     return
 
 

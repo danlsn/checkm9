@@ -19,7 +19,7 @@ logging.getLogger('sqlalchemy.dialects.postgresql').setLevel(logging.DEBUG)
 logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
 
 
-# requests_cache.install_cache(cache_name='cache', backend='sqlite', expire_after=600)
+requests_cache.install_cache(cache_name='cache', backend='sqlite', expire_after=600)
 
 
 def flatten(t):

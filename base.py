@@ -1,10 +1,11 @@
+import os
+
+# Load Environment Variables
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Load Environment Variables
-from dotenv import load_dotenv
-import os
 load_dotenv()
 
 # SQLAlchemy Engine

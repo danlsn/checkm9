@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 # SQLAlchemy Engine
-LOCAL_DB_ENGINE_PATH = os.environ.get('LOCAL_DB_ENGINE_PATH')
+LOCAL_DB_ENGINE_PATH = os.environ.get('RASPI_DB_ENGINE_PATH')
 engine = create_engine(LOCAL_DB_ENGINE_PATH, echo=True)
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
